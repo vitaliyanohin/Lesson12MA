@@ -20,17 +20,17 @@ public class Application {
   public static double integrate(DoubleUnaryOperator f, double a, double b) {
     double result = 0;
     double h = 10E-6;
-    double n = ((b - a) / h);
+    double n = (b - a) / h;
     for (int i = 0; i < n; i++) {
       result += f.applyAsDouble(a + h * i);
     }
-    result *= h;
-    return result;
+    return result * h;
   }
+
   public static <T, U> Function<T, U> ternaryOperator(
           Predicate<? super T> condition,
           Function<? super T, ? extends U> ifTrue,
           Function<? super T, ? extends U> ifFalse) {
-    return t -> (condition.test(t)) ? ifTrue.apply(t) : ifFalse.apply(t);
+    return t -> condition.test(t) ? ifTrue.apply(t) : ifFalse.apply(t);
   }
 }
